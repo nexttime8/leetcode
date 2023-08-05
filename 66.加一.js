@@ -47,29 +47,26 @@
   return str.split("")
 } */
 
-var plusOne = function (digits) {
-  let length = digits.length
-  let [num, ...arr] = digits.reverse()
-  if (length > 1) {
-    if (digits[length - 1] !== 9) {
-      return [...arr.reverse(), num + 1]
-    } else {
-      return [...plusOne(arr.reverse()), 0]
-    }
-  } else {
-    if (digits[length - 1] === 9) {
-      return [1, 0]
-    } else {
-      return [digits[length - 1] + 1]
-    }
-  }
-}
-
+/*  */
 /* var plusOne = function (digits) {
+  if (digits.length === 1) {
+    return digits[0] === 9 ? [1, 0] : [digits[0] + 1]
+  }
+  let [num, ...arr] = digits.reverse()
+  digits.reverse()
+  if (num !== 9) {
+    return [...arr.reverse(), num + 1]
+  } else {
+    return [...plusOne(arr.reverse()), 0]
+  }
+} */
+
+var plusOne = function (digits) {
   for (let i = digits.length - 1; i >= 0; i--) {
     if (digits[i] === 9) {
       digits[i] = 0
     } else {
+      // 只要遇到不是9的都会在这里返回
       digits[i]++
       return digits
     }
@@ -77,5 +74,5 @@ var plusOne = function (digits) {
   // 这是数组的每一位都是9的情况
   digits.unshift(1)
   return digits
-} */
+}
 // @lc code=end

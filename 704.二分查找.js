@@ -32,7 +32,7 @@
 } */
 
 // 左闭右开实现
-var search = function (nums, target) {
+/* var search = function (nums, target) {
   let left = 0
   let right = nums.length
   while (left < right) {
@@ -46,5 +46,37 @@ var search = function (nums, target) {
     }
   }
   return -1
+} */
+
+// 二次尝试（左闭右闭）
+/* var search = function (nums, target) {
+  let left = 0
+  let right = nums.length - 1
+  while (left <= right) {
+    let middle = Math.floor((left + right) / 2)
+    console.log(left, right)
+    if (nums[middle] > target) {
+      right = middle - 1
+    } else if (nums[middle] < target) {
+      left = middle + 1
+    } else {
+      return middle
+    }
+  }
+  return -1
+} */
+
+var search = function (nums, target) {
+  let lo = 0,
+    hi = nums.length - 1
+  while (lo < hi) {
+    let mid = lo + Math.floor((hi - lo + 1) / 2)
+    if (target < nums[mid]) {
+      hi = mid - 1
+    } else {
+      lo = mid
+    }
+  }
+  return nums[lo] == target ? lo : -1
 }
 // @lc code=end

@@ -37,7 +37,7 @@
 } */
 
 // Object实现 O(n)
-var twoSum = function (nums, target) {
+/* var twoSum = function (nums, target) {
   const hash = {}
   for (let i in nums) {
     const n = nums[i]
@@ -45,6 +45,34 @@ var twoSum = function (nums, target) {
       return [hash[target - n], i]
     }
     hash[n] = i
+  }
+  return []
+} */
+
+// 二次尝试for...let+Map
+/* var twoSum = function (nums, target) {
+  let map = new Map()
+  for (let i = 0; i < nums.length; i++) {
+    if (map.has(target - nums[i])) {
+      return [map.get(target - nums[i]), i]
+    } else {
+      map.set(nums[i], i)
+    }
+  }
+} */
+
+// 二次尝试for...let+Object
+var twoSum = function (nums, target) {
+  let obj = new Object()
+  for (let i = 0; i < nums.length; i++) {
+    // tips1:不是用hasOwnProperty来判断某个属性是否存在
+    // if (obj.hasOwnProperty(target - nums[i])) {
+    if (obj[target - nums[i]] !== undefined) {
+      // 对象添加属性
+      return [obj[target - nums[i]], i]
+    }
+    // tips2:遍历数组，把数组每一个元素加到对象中
+    obj[nums[i]] = i
   }
   return []
 }

@@ -31,6 +31,15 @@ filter是原地修改
 } */
 
 /* 第二种方法for+原地赋值 */
+/* var removeDuplicates = function (nums) {
+  let i = 0
+  for (let j = 0; j < nums.length; j++) {
+    if (nums[i] !== nums[j]) nums[++i] = nums[j]
+  }
+  return ++i
+} */
+
+/* 升序数组,原地修改，前k个元素唯一；秒了 */
 var removeDuplicates = function (nums) {
   let i = 0
   for (let j = 0; j < nums.length; j++) {
