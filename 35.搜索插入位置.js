@@ -10,7 +10,7 @@
  * @param {number} target
  * @return {number}
  */
-/* 时间夫再度为O(n) */
+/* 时间复杂度为O(n) */
 /* var searchInsert = function (nums, target) {
   let flag = false
   for (let i = 0; i < nums.length; i++) {
@@ -50,7 +50,13 @@
   }
 } */
 
+/* 二次尝试，想了一下，秒了 */
 var searchInsert = function (nums, target) {
-  
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] >= target) {
+      return i
+    }
+  }
+  return nums.length
 }
 // @lc code=end

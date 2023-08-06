@@ -49,7 +49,7 @@
   nums1.sort((a, b) => a - b)
 } */
 
-var merge = function(nums1, m, nums2, n) {
+/* var merge = function(nums1, m, nums2, n) {
     let i = m - 1;
     let j = n - 1;
     let k = m + n - 1;
@@ -61,5 +61,28 @@ var merge = function(nums1, m, nums2, n) {
             nums1[k--] = nums2[j--];
         }
     }
-};
+}; */
+
+/* 二次尝试，成功 */
+var merge = function (nums1, m, nums2, n) {
+  // n2中数据和n1中相等，n2的数据在n1后面
+  let j = n - 1
+  for (let i = m - 1, k = m + n - 1; i >= 0; ) {
+    // 保证合并完nums1中有效数
+    if (nums2[j] >= nums1[i]) {
+      nums1[k--] = nums2[j--]
+      // 获取nums2[j]之前需要考虑数组越界问题
+      if (j >= 0 && nums2[j] === nums1[i]) {
+        nums1[k--] = nums1[i--]
+      }
+    } else {
+      nums1[k--] = nums1[i--]
+    }
+  }
+  // 剩余部分处理，保证合并完nums2种有效数
+  for (let l = j; l >= 0; l--) {
+    nums1[l] = nums2[l]
+  }
+  return nums1
+}
 // @lc code=end

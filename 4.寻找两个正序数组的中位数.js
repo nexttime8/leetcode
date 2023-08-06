@@ -154,17 +154,17 @@
   return -1
 } */
 
-var findMedianSortedArrays = function (nums1, nums2) {
-  /* 第一步:获取两个数组长度,并保证nums1长度<nums2长度 */
+/* var findMedianSortedArrays = function (nums1, nums2) {
+  // 第一步:获取两个数组长度,并保证nums1长度<nums2长度
   let length1 = nums1.length
   let length2 = nums2.length
   if (length1 > length2) {
     return findMedianSortedArrays(nums2, nums1)
   }
-  /* 第二步:设定left和right值,作为循环条件 */
+  // 第二步:设定left和right值,作为循环条件
   let left = 0
   let right = length1
-  /* 第三步:开始循环,并根据left和right值,设置两个数组的分割线位置 */
+  // 第三步:开始循环,并根据left和right值,设置两个数组的分割线位置
   while (left <= right) {
     let mid1 = Math.floor((left + right) / 2)
     // 无论总长度是偶数还是奇数,中位数都取Math.floor((length2+length2+1)/2),并且左边个数多于右边
@@ -178,7 +178,7 @@ var findMedianSortedArrays = function (nums1, nums2) {
     let minRight1 = mid1 === length1 ? Number.MAX_SAFE_INTEGER : nums1[mid1]
     let maxLeft2 = mid2 === 0 ? Number.MIN_SAFE_INTEGER : nums2[mid2 - 1]
     let minRight2 = mid2 === length2 ? Number.MAX_SAFE_INTEGER : nums2[mid2]
-    /* 第四步:判断是否符合二分条件,符合则返回值,不符合则基于mid1修改left和right值 */
+    // 第四步:判断是否符合二分条件,符合则返回值,不符合则基于mid1修改left和right值
     if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
       if ((length1 + length2) % 2) {
         return Math.max(maxLeft1, maxLeft2) // 差点出小问题
@@ -193,8 +193,47 @@ var findMedianSortedArrays = function (nums1, nums2) {
       left = mid1 + 1
     }
   }
-  /* 第五步:没找到,特殊处理 */
+  // 第五步:没找到,特殊处理
+  return -1
+} */
+
+/* 二次尝试 */
+var findMedianSortedArrays = function (nums1, nums2) {
+  let n1 = nums1.length
+  let n2 = nums2.length
+  if (n1 > n2) return findMedianSortedArrays(nums2, nums1) // 这里是将数组传入，差点出小问题
+  let left = 0
+  // 这里是n1赋值给right！
+  let right = n1
+  while (left <= right) {
+    let mid1 = Math.floor((left + right) / 2)
+    let mid2 = Math.floor((n1 + n2 + 1) / 2 - mid1)
+
+    let maxLeft1 = mid1 === 0 ? Number.MIN_SAFE_INTEGER : nums1[mid1 - 1]
+    // 这里mid值是和right比较吗？不清晰。是和n1即nums1的长度比较！
+    let minRight1 = mid1 === n1 ? Number.MAX_SAFE_INTEGER : nums1[mid1]
+    let maxLeft2 = mid2 === 0 ? Number.MIN_SAFE_INTEGER : nums2[mid2 - 1]
+    // 这里是和nums2的长度比较！
+    let minRight2 = mid2 === n2 ? Number.MAX_SAFE_INTEGER : nums2[mid2]
+
+    if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+      if ((n1 + n2) % 2) {
+        return Math.max(maxLeft1, maxLeft2)
+      } else {
+        // 这里出小问题，两个数求均值，不需要取整
+        return (
+          (Math.max(maxLeft1, maxLeft2) + Math.min(minRight1, minRight2)) / 2
+        )
+      }
+    }
+    // 这里怎么赋值，逻辑不清晰;left和right维护的是nums1数组的分割位置
+    else if (maxLeft1 > minRight2) {
+      right = mid1 - 1
+    } else if (maxLeft2 > minRight1) {
+      left = mid1 + 1
+    }
+  }
+  // 不要忘记边界处理
   return -1
 }
-
 // @lc code=end
