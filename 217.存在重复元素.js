@@ -70,7 +70,7 @@
 } */
 
 /* 用reduce函数 */
-var containsDuplicate = function (nums) {
+/* var containsDuplicate = function (nums) {
   nums.sort((a, b) => a - b)
   let flag = false
   nums.reduce((prev, curr) => {
@@ -79,5 +79,20 @@ var containsDuplicate = function (nums) {
     console.log(prev, curr)
   })
   return flag
+} */
+
+/* 第二天脑子清醒，sort+双指针，秒了 */
+var containsDuplicate = function (nums) {
+  nums.sort((a, b) => a - b)
+  let left = 0
+  let right = 1
+  while (right < nums.length) {
+    if (nums[left] === nums[right]) return true
+    else if (nums[left] < nums[right]) {
+      right++
+      left++
+    }
+  }
+  return false
 }
 // @lc code=end

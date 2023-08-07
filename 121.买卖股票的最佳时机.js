@@ -49,7 +49,7 @@
   return max - Math.min(...prices) > 0 ? max - Math.min(...prices) : 0
 } */
 
-var maxProfit = function (prices) {
+/* var maxProfit = function (prices) {
   let arr = []
   prices.forEach((item, index) => {
     arr.push([item, index])
@@ -80,5 +80,55 @@ var maxProfit = function (prices) {
     }
   }
   return max
+} */
+
+/* 数组解构 */
+/* var maxProfit = function (prices) {
+  let [num, ...arr] = prices
+  let max = 0
+  if (arr.length) {
+    if (num >= Math.max(...arr)) {
+      return maxProfit(arr)
+    } else {
+      max = Math.max(...arr)
+      return maxProfit(arr) > max - num ? maxProfit(arr) : max - num
+    }
+  } else return max
+} */
+
+/* 双指针解法 */
+/* var maxProfit = function (prices) {
+  let left = 0 // Buy
+  let right = 1 // sell
+  let max_profit = 0
+  while (right < prices.length) {
+    if (prices[left] < prices[right]) {
+      let profit = prices[right] - prices[left] // our current profit
+      max_profit = Math.max(max_profit, profit)
+    } else {
+      left = right
+    }
+    right++
+  }
+  return max_profit
+} */
+
+/* 知道用双指针之后，尝试 */
+var maxProfit = function (prices) {
+  let left = 0
+  let right = 1
+  let current = 0
+  while (right < prices.length) {
+    if (prices[left] > prices[right]) {
+      left++
+    } else {
+      current =
+        current > prices[right] - prices[left]
+          ? current
+          : prices[right] - prices[left]
+      right++
+    }
+  }
+  return current
 }
 // @lc code=end
