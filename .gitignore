@@ -2,3 +2,5 @@
 *.png
 
 # 配置用户名和邮箱，保证通过当前github账号push，保证有conmits git config --global user.name ''，或者user.email，总之保证global
+
+image*
