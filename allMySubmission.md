@@ -32,7 +32,7 @@
    1. 第一次调整:js 中输出小数!不会自动向下取整;加上 parseInt()强制类型转换
    2. 第二次调整:考虑 target 不存在的情况[没认真看题目:如果目标值存在返回下标，否则返回 -1]
 7. 二次尝试发现，根据 nums[middle]与 target 比较的 left 和 right 的取值，要弄清楚
-8. 看 top voted solution，一种不同的取 middle 方式，`let mid = lo + Math.floor((hi - lo + 1) / 2)`；且最终的目标是 lo，最终的索引包存在 lo 里面；循环条件是 `lo<ro`，性能很不错![二分查找top voted solution中lo保存最终索引](images/image-26.png)
+8. 看 top voted solution，一种不同的取 middle 方式，`let mid = lo + Math.floor((hi - lo + 1) / 2)`也是`let mid = left + ((right - left) >> 1);`；且最终的目标是 lo，最终的索引包存在 lo 里面；循环条件是 `lo<ro`，性能很不错![二分查找top voted solution中lo保存最终索引](images/image-26.png)
 
 ## 4 寻找两个正序数组的中位数 + +
 
@@ -170,6 +170,20 @@
 4. 用 reduce 方法，为什么 prev 会是 undefined？![reduce方法使用](images/image-34.png)
 5. 第二天脑子清醒，sort+双指针，秒了；但是时间复杂度不是很好![时间复杂度一般](images/image-39.png)
 
-## 存在重复元素 II
+## 219 存在重复元素 II
 
-1.
+## 34.在排序数组中查找元素的第一个和最后一个位置 +
+
+1. 用 JavaScript 直接秒了，没意义!因为时间复杂度不符合要求[indexOf 和 lastIndexOf 方法](images/image-41.png)
+2. top voted solution 用双指针的思路![双指针](images/image-42.png)，没理解
+3. 看完题解自己尝试，结果很好。![双指针效果很好](images/image-43.png)
+4. 题解注意事项
+   1. 写一个箭头函数，用双指针
+   2. `>=`两种情况，统一处理方式，为了保证找到的是第一个和 target 相等的元素，如果直接找到相等的返回，会导致找到后面的 target
+   3. 边界条件判断，找到的索引对应的元素之不相等，表示没找到，就算是没找到，这个得到的索引对应的元素也是比 target 小但是最接近 target 的元素
+   4. 理解第二次调用的时候用 target+1 传入的含义
+
+## 69 x-的平方根
+
+1. 不会用二分法的思想
+2. 直接求平方，时间效率低![直接求平方](images/image-44.png)

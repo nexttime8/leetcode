@@ -14,6 +14,7 @@
   // 规律二：偶数行奇数个元素，奇数行偶数个元素，只需要考虑前 Math.floor((rowIndex+2)/2)个元素
   // 要求： O(rowIndex) 空间复杂度【不是时间复杂度！】
   // 首先做不出的时候，应该首先解决问题，其次再优化
+  // 这个时间复杂度是n^2
   let arr = []
   for (let i = 0; i <= rowIndex; i++) {
     arr.push(Array(i + 1))
