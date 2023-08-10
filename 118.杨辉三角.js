@@ -31,7 +31,7 @@
 } */
 
 /* top voted solution */
-var generate = function (numRows) {
+/* var generate = function (numRows) {
   var i = 0
   var j = 0
   // Create an array list to store the output result...
@@ -50,5 +50,21 @@ var generate = function (numRows) {
     }
   }
   return res // Return the output list of pascal values...
+} */
+
+/* 二次尝试，仍有错误TypeError: Cannot set properties of undefined (setting '0') */
+var generate = function (numRows) {
+  let arr = Array(numRows)
+  for (let i = 0; i < numRows; i++) {
+    arr[i] = Array(i + 1)
+    for (let j = 0; j <= i; j++) {
+      if (j === 0 || j === i) {
+        arr[i][j] = 1
+      } else {
+        arr[i][j] = arr[i - 1][j] + arr[i - 1][j - 1]
+      }
+    }
+  }
+  return arr
 }
 // @lc code=end

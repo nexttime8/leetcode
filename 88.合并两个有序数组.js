@@ -64,7 +64,7 @@
 }; */
 
 /* 二次尝试，成功 */
-var merge = function (nums1, m, nums2, n) {
+/* var merge = function (nums1, m, nums2, n) {
   // n2中数据和n1中相等，n2的数据在n1后面
   let j = n - 1
   for (let i = m - 1, k = m + n - 1; i >= 0; ) {
@@ -82,6 +82,25 @@ var merge = function (nums1, m, nums2, n) {
   // 剩余部分处理，保证合并完nums2种有效数
   for (let l = j; l >= 0; l--) {
     nums1[l] = nums2[l]
+  }
+  return nums1
+} */
+
+/* 二次尝试 一次过，且时间复杂度符合要求*/
+var merge = function (nums1, m, nums2, n) {
+  let right1 = m - 1
+  let right2 = n - 1
+  let target = m + n - 1
+  while (target >= 0 && right1 >= 0 && right2 >= 0) {
+    if (nums1[right1] > nums2[right2]) {
+      nums1[target--] = nums1[right1--]
+    } else nums1[target--] = nums2[right2--]
+  }
+  // nums1没有遍历到0，不需要重复赋值
+  if (right1 < 0) {
+    for (let i = right2; i >= 0; i--) {
+      nums1[target--] = nums2[i]
+    }
   }
   return nums1
 }

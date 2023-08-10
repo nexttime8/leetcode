@@ -33,11 +33,24 @@
 nums.length 在这里指的是 当前行总元素个数；i>=j在杨辉三角中总成立
 i行j列元素(j不为第一个，不为最后一个元素) a[i][j] = a[i][j-1] * (nums.length-j) / j
 */
-var getRow = function (r) {
+/* var getRow = function (r) {
   var ans = new Array(r + 1)
   ans[0] = ans[r] = 1
   // 每个元素都可以右同行前面一个元素推断出来
   for (i = 1, up = r; i < r; i++, up--) ans[i] = (ans[i - 1] * up) / i
   return ans
+} */
+
+/* 二次尝试，一次过 */
+var getRow = function (r) {
+  let arr = Array(r + 1)
+  for (let i = 0; i <= r; i++) {
+    if (i === 0 || i === r) {
+      arr[i] = 1
+    } else {
+      arr[i] = (arr[i - 1] * (r - i + 1)) / i
+    }
+  }
+  return arr
 }
 // @lc code=end

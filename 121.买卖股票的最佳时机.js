@@ -114,7 +114,7 @@
 } */
 
 /* 知道用双指针之后，尝试 */
-var maxProfit = function (prices) {
+/* var maxProfit = function (prices) {
   let left = 0
   let right = 1
   let current = 0
@@ -130,5 +130,32 @@ var maxProfit = function (prices) {
     }
   }
   return current
+} */
+
+/* 二次尝试，超时，循环无法退出 */
+var maxProfit = function (prices) {
+  let profit = 0
+  let left = 0
+  let right = 1
+  while (right < prices.length) {
+    console.log(prices[left], prices[right])
+    if (prices[right] > prices[left]) {
+      profit =
+        profit > prices[right] - prices[left]
+          ? profit
+          : prices[right] - prices[left]
+      right++
+    } else if (prices[right] <= prices[left]) {
+      left++
+      right++
+    }
+    if (right === prices.length) {
+      if (left <= prices.length - 2) {
+        left++
+      }
+      right = left + 1
+    }
+  }
+  return profit
 }
 // @lc code=end
