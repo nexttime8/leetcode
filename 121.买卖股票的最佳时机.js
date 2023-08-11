@@ -114,7 +114,7 @@
 } */
 
 /* 知道用双指针之后，尝试 */
-/* var maxProfit = function (prices) {
+var maxProfit = function (prices) {
   let left = 0
   let right = 1
   let current = 0
@@ -130,10 +130,10 @@
     }
   }
   return current
-} */
+}
 
 /* 二次尝试，超时，循环无法退出 */
-var maxProfit = function (prices) {
+/* var maxProfit = function (prices) {
   let profit = 0
   let left = 0
   let right = 1
@@ -157,5 +157,5 @@ var maxProfit = function (prices) {
     }
   }
   return profit
-}
+} */
 // @lc code=end
