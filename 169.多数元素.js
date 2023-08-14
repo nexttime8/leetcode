@@ -31,17 +31,17 @@
 /* var majorityElement = function(nums){
   if(nums.length===1) return nums[0]
   nums.sort((a,b)=>a-b)
-  let left = 0
+  // let left = 0
   // tips4:数组长度为1要特殊处理
   let right = 1
   let count = 1
   let target = nums.length>>1
   while(right<=nums.length){
-    if(nums[left]===nums[right]) {
+    if(nums[right-1]===nums[right]) {
       count++
       // tips1:是大于
       if(count>target){
-        return nums[left]
+        return nums[right-1]
       }
     }
     else {
@@ -49,12 +49,12 @@
       count = 1
     }
     // tips3:总要执行
-    left++
+    // left++
     right++
   }
 } */
 
-var majorityElement = function(nums) {
+/* var majorityElement = function(nums) {
   // Initialize sol and cnt to store the solution and its frequency for respective iterations...
   let sol = 0, cnt = 0;
   // For every element i in the array...
@@ -62,7 +62,7 @@ var majorityElement = function(nums) {
       // If cnt is equal to zero, update sol as sol = i
       if(cnt == 0){
           sol = nums[i];
-          cnt = 1;
+          cnt = 1; // 1?
       }
       // If i is equal to candidate, increment cnt...
       else if(sol == nums[i]){
@@ -75,5 +75,7 @@ var majorityElement = function(nums) {
   }
   // Return & print the solution...
   return sol;
-}
+} */
+
+
 // @lc code=end

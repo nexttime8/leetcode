@@ -9,7 +9,8 @@
  * @param {number} n
  * @return {number[][]}
  */
-var generateMatrix = function (n) {
+/* 第一次尝试 runrime error */
+/* var generateMatrix = function (n) {
   let arr = []
   for (let i = 0; i < n; i++) {
     arr[i][n - 1] = n + i
@@ -24,5 +25,5 @@ var generateMatrix = function (n) {
     arr[(Math.floor(n >> 1), Math.floor(n >> 1)) - 1] = n ** 2
   }
   return arr
-}
+} */
 // @lc code=end

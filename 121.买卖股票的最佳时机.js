@@ -114,7 +114,7 @@
 } */
 
 /* 知道用双指针之后，尝试 */
-var maxProfit = function (prices) {
+/* var maxProfit = function (prices) {
   let left = 0
   let right = 1
   let current = 0
@@ -130,7 +130,7 @@ var maxProfit = function (prices) {
     }
   }
   return current
-}
+} */
 
 /* 二次尝试，超时，循环无法退出 */
 /* var maxProfit = function (prices) {
@@ -158,4 +158,48 @@ var maxProfit = function (prices) {
   }
   return profit
 } */
+
+
+/* 动态规划算法 */
+/* const maxProfit = prices => {
+  const len = prices.length;
+  // 创建dp数组
+  const dp = new Array(len).fill([0, 0]);
+  // dp数组初始化
+  dp[0] = [-prices[0], 0];
+  for (let i = 1; i < len; i++) {
+    // 更新dp[i]
+    dp[i] = [
+      Math.max(dp[i - 1][0], -prices[i]),
+      Math.max(dp[i - 1][1], prices[i] + dp[i - 1][0]),
+    ];
+  }
+  return dp[len - 1][1];
+}; */
+
+/* 二次尝试，贪心算法 */
+/* var maxProfit = function (prices) {
+  let len = prices.length
+  let lowerPrice = prices[0]
+  let profit = 0
+  for (let i = 0; i < len; i++) {
+    lowerPrice = Math.min(lowerPrice, prices[i])
+    profit = Math.max(profit, prices[i] - lowerPrice)
+  }
+  return profit
+} */
+
+/* 二次尝试，动态规划算法 */
+var maxProfit = function (prices) {
+  let len = prices.length
+  let dp = Array(len).fill([0, 0])
+  dp[0] = [-prices[0], 0]
+  for (let i = 1; i < len; i++) {
+    dp[i] = [
+      Math.max(dp[i - 1][0], -prices[i]),
+      Math.max(dp[i - 1][1], prices[i] + dp[i - 1][0])
+    ]
+  }
+  return dp[len - 1][1]
+}
 // @lc code=end
