@@ -53,7 +53,7 @@
 } */
 
 /* 二次尝试，仍有错误TypeError: Cannot set properties of undefined (setting '0') */
-var generate = function (numRows) {
+/* var generate = function (numRows) {
   let arr = Array(numRows)
   for (let i = 0; i < numRows; i++) {
     arr[i] = Array(i + 1)
@@ -63,6 +63,22 @@ var generate = function (numRows) {
       } else {
         arr[i][j] = arr[i - 1][j] + arr[i - 1][j - 1]
       }
+    }
+  }
+  return arr
+} */
+
+/* 尝试，仍然是TypeError: Cannot set properties of undefined (setting '0') */
+/* 是map和Array相关的问题 */
+/* 54.04 % 96.75 % */
+var generate = function (numRows) {
+  // let arr = Array(numRows).map(item => Array(numRows).fill(0)) // 这里有问题
+  let arr = Array(numRows).fill(undefined).map(item => [])
+  for (let i = 0; i < numRows; i++) {
+    // j<=i
+    for (let j = 0; j <= i; j++) {
+      if (!j || j === i) arr[i][j] = 1
+      else arr[i][j] = arr[i - 1][j] + arr[i - 1][j - 1]
     }
   }
   return arr

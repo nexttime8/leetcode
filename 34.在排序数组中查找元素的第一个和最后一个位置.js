@@ -37,7 +37,7 @@
 } */
 
 /* 看完题解，自己尝试 */
-var searchRange = function (nums, target) {
+/* var searchRange = function (nums, target) {
   const find = (N, T, left = 0, right = nums.length - 1) => {
     // let mid = 0
     while (left <= right) {
@@ -46,6 +46,7 @@ var searchRange = function (nums, target) {
       // else if (N[mid] > T) right = mid - 1
       // else return mid
       // 如果相等的时候直接返回，如[5,7,7,8,8,10]可能会导致得到的是第二个8
+      // 所以相等的时候也要变！
       else right = mid - 1
     }
     // 如果没找到，返回的是左边的
@@ -53,7 +54,26 @@ var searchRange = function (nums, target) {
   }
   let num = find(nums, target)
   // 要考虑边界情况，所以mid要在外面初始化
-  if (nums[num] !== target) return [-1, -1]
+  if (nums[num] !== target) return [-1, -1] // 这种是连一个都没找到，更别说“第一个”了
+  // 在已经有一个的情况下，找第二个，如何保证，有一个就会有两个？
+  // 只有一个的话，返回的两个是同一索引
   return [num, find(nums, target + 1, num + 1) - 1]
+} */
+
+/* 时间复杂度要求！O(log n) + 非递减顺序排列 = 二分法？✔ 二分法变体！✔ */
+/* 88.78 % 15.59 % */
+var searchRange = function (nums, target) {
+  let find = function (N, T) {
+    let left = 0, right = N.length - 1
+    while (left <= right) {
+      let mid = (left + right) >> 1
+      if (N[mid] < T) left = mid + 1
+      else right = mid - 1
+    }
+    return left
+  }
+  let num = find(nums, target)
+  if (nums[num] !== target) return [-1, -1]
+  return [num, find(nums, target + 1) - 1]
 }
 // @lc code=end

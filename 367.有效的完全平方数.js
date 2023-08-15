@@ -11,7 +11,7 @@
  */
 
 /* 二分法 */
-var isPerfectSquare = function (num) {
+/* var isPerfectSquare = function (num) {
   let left = 1
   let right = (num >> 1) + 1
   let mid = 0
@@ -24,6 +24,21 @@ var isPerfectSquare = function (num) {
     } else {
       return true
     }
+  }
+  return false
+} */
+
+/* 二次尝试 二分法  84.81 %  18.78 %  */
+var isPerfectSquare = function (num) {
+  // 边界条件考虑
+  if (num === 1) return 1
+  let left = 1
+  let right = num - 1
+  while (left <= right) {
+    let mid = (left + right) >> 1
+    if (mid ** 2 < num) left = mid + 1
+    else if (mid ** 2 > num) right = mid - 1
+    else return true
   }
   return false
 }

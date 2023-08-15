@@ -42,7 +42,7 @@ i行j列元素(j不为第一个，不为最后一个元素) a[i][j] = a[i][j-1] 
 } */
 
 /* 二次尝试，一次过 */
-var getRow = function (r) {
+/* var getRow = function (r) {
   let arr = Array(r + 1)
   for (let i = 0; i <= r; i++) {
     if (i === 0 || i === r) {
@@ -50,6 +50,16 @@ var getRow = function (r) {
     } else {
       arr[i] = (arr[i - 1] * (r - i + 1)) / i
     }
+  }
+  return arr
+} */
+
+/* 再次尝试 公式 68.95 % 79.91 % */
+var getRow = function (r) {
+  let arr = Array(r + 1)
+  arr[0] = arr[r] = 1
+  for (let i = 1; i < r; i++) {
+    arr[i] = arr[i - 1] * (r + 1 - i) / i
   }
   return arr
 }

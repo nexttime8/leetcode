@@ -30,7 +30,7 @@
     obj[a] = prices.indexOf(a)
     return a - b
   })
-  
+
 } */
 
 /* 直接找最大值 */
@@ -190,7 +190,7 @@
 } */
 
 /* 二次尝试，动态规划算法 */
-var maxProfit = function (prices) {
+/* var maxProfit = function (prices) {
   let len = prices.length
   let dp = Array(len).fill([0, 0])
   dp[0] = [-prices[0], 0]
@@ -201,5 +201,22 @@ var maxProfit = function (prices) {
     ]
   }
   return dp[len - 1][1]
+} */
+
+/* 再次尝试，动态规划，脑子里面要有公式 94.39 % 24.67 % */
+// Line 206: TypeError: Cannot set properties of undefined (setting '0')
+var maxProfit = function (prices) {
+  let len = prices.length
+  // dp声明的行列弄反了
+  // let dp = Array(2).fill(undefined).map(item => Array(len).fill(0))
+  let dp = Array(len).fill(Array(2).fill(0))
+  dp[0][0] = -prices[0]
+  dp[0][1] = 0
+  for (let j = 1; j < len; j++) { // nums
+    dp[j][0] = Math.max(dp[j - 1][0], -prices[j])
+    dp[j][1] = Math.max(dp[j][0] + prices[j], dp[j - 1][1])
+  }
+  return dp[len - 1][1]
 }
+
 // @lc code=end

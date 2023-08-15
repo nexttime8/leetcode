@@ -36,7 +36,7 @@
   return result
 } */
 
-/* 看了top voted solution，用双指针的思想 */
+/* 看了top voted solution，用双指针的思想  71.29 % 81.1 %  */
 var sortedSquares = function (nums) {
   let left = 0
   let right = nums.length - 1
@@ -55,4 +55,10 @@ var sortedSquares = function (nums) {
   }
   return result
 }
+
+/* sort+map 82.85 % 29.38 % */
+/* var sortedSquares = function (nums) {
+  nums = nums.map(item => item ** 2)
+  return nums.sort((a, b) => a - b)
+} */
 // @lc code=end

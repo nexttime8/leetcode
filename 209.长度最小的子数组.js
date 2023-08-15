@@ -4,7 +4,6 @@
  * [209] 长度最小的子数组
  */
 
-// @lc code=start
 /**
  * @param {number} target
  * @param {number[]} nums
@@ -41,7 +40,7 @@
 } */
 
 /* 看清题目重做，写错了一百次，将数组存储改为变量存储，每次进行大小比较 */
-var minSubArrayLen = function (target, nums) {
+/* var minSubArrayLen = function (target, nums) {
   let n = nums.length
   let i = 0
   let j = 1
@@ -59,13 +58,8 @@ var minSubArrayLen = function (target, nums) {
   }
   // 判断是否为undefined
   return res === Infinity ? 0 : res
-}
+} */
 
-/**
- * @param {number} target
- * @param {number[]} nums
- * @return {number}
- */
 /* var minSubArrayLen = function (target, nums) {
   let res //返回值
   let i = 0,
@@ -80,4 +74,14 @@ var minSubArrayLen = function (target, nums) {
   }
   return res ? res : 0
 } */
+
+var minSubArrayLen = function (target, nums) {
+  let n = nums.length
+  let dp = Array(n).fill(undefined).map(item => Array(2).fill(0))
+  dp[0][0] = 1 // 前面元素总和
+  dp[0][1] = 1 // 元素个数
+  for (let i = 0; i < n; i++) {
+    // dp[i][0] = dp[]
+  }
+}
 // @lc code=end

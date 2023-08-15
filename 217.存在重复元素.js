@@ -81,18 +81,23 @@
   return flag
 } */
 
-/* 第二天脑子清醒，sort+双指针，秒了 */
-var containsDuplicate = function (nums) {
+/* 第二天脑子清醒，sort+双指针，秒了 26.68 % 88.61 % */
+/* var containsDuplicate = function (nums) {
   nums.sort((a, b) => a - b)
   let left = 0
-  let right = 1
-  while (right < nums.length) {
-    if (nums[left] === nums[right]) return true
-    else if (nums[left] < nums[right]) {
-      right++
+  while (left < nums.length - 1) {
+    if (nums[left] === nums[left + 1]) return true
+    else if (nums[left] < nums[left + 1]) {
       left++
     }
   }
   return false
-}
+} */
+
+/* 突然想到这个方法 去重判断个数 61.29 % 34.61 % */
+/* var containsDuplicate = function (nums) {
+  let set = new Set(nums)
+  return set.size !== nums.length
+} */
+
 // @lc code=end

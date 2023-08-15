@@ -77,5 +77,24 @@
   return sol;
 } */
 
-
+/* 再次尝试 动态规划的思想 当前扫描的元素中 的多数元素 58.32 % 96.28 %  */
+// 感觉代码有点冗余？不冗余，逻辑明确，代码简洁 摩尔投票法
+// 只适合数组中一定存在主要元素的情形
+var majorityElement = function (nums) {
+  let len = nums.length
+  let cur = nums[0]
+  let cnt = 1
+  for (let i = 1; i < len; i++) {
+    if (cnt === 0) {
+      cur = nums[i]
+      cnt = 1
+      continue
+    }
+    if (nums[i] === cur) cnt++
+    else {
+      cnt--
+    }
+  }
+  return cur
+}
 // @lc code=end
