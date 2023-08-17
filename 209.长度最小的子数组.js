@@ -75,13 +75,67 @@
   return res ? res : 0
 } */
 
-var minSubArrayLen = function (target, nums) {
+/* 再次忽略了>target这一情况(这个答案是=target的答案) */
+
+/* >=target的情况,用动态规划,时空效率很低 16.35 % 5.01 %  */
+/* var minSubArrayLen = function (target, nums) {
   let n = nums.length
   let dp = Array(n).fill(undefined).map(item => Array(2).fill(0))
-  dp[0][0] = 1 // 前面元素总和
-  dp[0][1] = 1 // 元素个数
-  for (let i = 0; i < n; i++) {
-    // dp[i][0] = dp[]
+  dp[0][0] = nums[0] // 前面元素总和（小于target）
+  dp[0][1] = 0 // 第一个元素的索引
+  if (dp[0][0] > target) return 1
+  let len = Infinity
+  for (let i = 1; i < n; i++) {
+    dp[i][0] = nums[i] + dp[i - 1][0]
+    dp[i][1] = dp[i - 1][1]
+    // console.log(dp[i][0], dp[i][1])
+    while (dp[i][0] >= target) {
+      len = len > i - dp[i][1] + 1 ? i - dp[i][1] + 1 : len
+      dp[i][0] -= nums[dp[i][1]] // *
+      dp[i][1] = dp[i][1] + 1
+      // console.log(dp[i][0], dp[i][1], len)
+    }
+    // console.log('**************')
   }
-}
+  return len === Infinity ? 0 : len
+} */
+
+/* 用双指针实现 但是代码逻辑有点冗余,时空效率同样很低? 12.56 % 5.01 % */
+/* var minSubArrayLen = function (target, nums) {
+  let n = nums.length
+  let left = 0, right = 1
+  let sum = nums[left]
+  if (sum >= target) return 1
+  let len = Infinity
+  for (; right < n; right++) {
+    if (nums[right] >= target) return 1
+    sum += nums[right]
+    console.log(sum)
+    while (sum >= target) {
+      len = len > right - left + 1 ? right - left + 1 : len
+      console.log(sum, len)
+      sum -= nums[left++]
+    }
+    console.log('*************')
+  }
+  return len === Infinity ? 0 : len
+} */
+
+/* 滑动窗口(其实是上面逻辑的一点点简化而已) 83.46 % 87.7 % 时间复杂度是O(n),并不是最优 */
+var minSubArrayLen = function (target, nums) {
+  let left = 0;
+  let sum = 0;
+  let len = Infinity;
+
+  for (let right = 0; right < nums.length; right++) {
+    sum += nums[right];
+    while (sum >= target) {
+      len = Math.min(len, right - left + 1);
+      sum -= nums[left++];
+    }
+  }
+
+  return len === Infinity ? 0 : len;
+};
+
 // @lc code=end
